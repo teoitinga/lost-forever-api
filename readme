@@ -22,3 +22,7 @@ yarn sequelize init
 
 # 3. executa migrate
     # yarn sequelize db:migrate
+
+
+# Criando a aplicação
+    # yarn add express dotenv cors consign compression body-parser
