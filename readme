@@ -10,3 +10,15 @@ npm install dotenv
 #criando o ambiente para conexão com o banco de dados
 yarn sequelize init
 
+
+# Paasos para recuperar os dados
+
+# 1. Criar banco de dados
+    # yarn sequelize db:create
+
+# 2. importa os dados via query
+    # Exceuta a query do backup fornecido
+    # agora que já tem os dados originais so sistema lost siga o próximo passo
+
+# 3. executa migrate
+    # yarn sequelize db:migrate

@@ -25,8 +25,8 @@ module.exports = {
         VALORINSTALL: "100",
         VALORMENSAL: "5",
         DRIVERBCK: "f",
-        createdby: 'AASDKHADADA-ADSDLAKDJLAKDS-ASDADASDAS',
-        created: "2022-02-02 08:28:11",
+        //createdby: 'AASDKHADADA-ADSDLAKDJLAKDS-ASDADASDAS',
+        //created: "2022-02-02 08:28:11",
       }
     ], {});
   },

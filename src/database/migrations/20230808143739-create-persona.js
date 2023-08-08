@@ -7,7 +7,7 @@ module.exports = {
                 primaryKey: true,
                 defaultValue: Sequelize.INTEGER,
                 unique: true,
-                type: Sequelize.STRING
+                type: Sequelize.INTEGER
             },
             apelido: {
                 type: Sequelize.STRING,
@@ -22,7 +22,7 @@ module.exports = {
                 allowNull: true,
             },
             debito: {
-                type: Sequelize.DECIMAL(6,2),
+                type: Sequelize.FLOAT,
                 allowNull: true,
             },
             endereco: {
@@ -60,22 +60,6 @@ module.exports = {
             ultAtualizacao: {
                 type: Sequelize.DATE,
                 allowNull: true,
-            },
-            createdby: {
-                allowNull: true,
-                type: Sequelize.STRING,
-            },
-            updatedby: {
-                allowNull: true,
-                type: Sequelize.STRING,
-            },
-            created: {
-                allowNull: true,
-                type: Sequelize.DATE
-            },
-            updated: {
-                allowNull: true,
-                type: Sequelize.DATE
             }
         });
     },
