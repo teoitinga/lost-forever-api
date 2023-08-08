@@ -1,0 +1,12 @@
+# Criando a estrutura padrão de projeto node
+npm init
+
+# Instaldndo biblioteca sequelize e mysql
+yarn sequelize mysql2 sequelize-cli
+
+# Instalando biblioteca para referencia de dados
+npm install dotenv
+
+#criando o ambiente para conexão com o banco de dados
+yarn sequelize init
+
