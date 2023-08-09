@@ -9,7 +9,8 @@ module.exports = {
     dialect: "mysql",
     define: {
       timestamps: true,
-      underscored: false
+      underscored: false,
+      freezeTableName: true
     }
   }, 
   development: {
@@ -20,7 +21,8 @@ module.exports = {
     dialect: "mysql",
     define: {
       timestamps: true,
-      underscored: false
+      underscored: false,
+      freezeTableName: true
     }
   },
   local: {
@@ -31,7 +33,8 @@ module.exports = {
     dialect: "mysql",
     define: {
       timestamps: true,
-      underscored: false
+      underscored: false,
+      freezeTableName: true
     }
   },
   test: {
@@ -42,7 +45,8 @@ module.exports = {
     dialect: "mysql",
     define: {
       timestamps: true,
-      underscored: false
+      underscored: false,
+      freezeTableName: true
     }
   }
 }

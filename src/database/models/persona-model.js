@@ -1,13 +1,13 @@
 const { Model, DataTypes } = require('sequelize');
 
-class Persona extends Model {
+class PersonaModel extends Model {
 
     static init(connection) {
         super.init({
             apelido: DataTypes.STRING,
             categoria: DataTypes.STRING,
             data_cadastro: DataTypes.DATE,
-            debito: DataTypes.DECIMAL(6,2),
+            debito: DataTypes.DOUBLE,
             endereco: DataTypes.STRING,
             fone: DataTypes.STRING,
             nome: DataTypes.STRING,
@@ -29,4 +29,5 @@ class Persona extends Model {
         })
     }
 };
-module.exports = Persona;
+
+module.exports = PersonaModel;
