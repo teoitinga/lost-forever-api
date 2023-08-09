@@ -30,3 +30,19 @@ yarn sequelize init
 
 # Implementando o middleware e rotas de autenticação
     # npm install jsonwebtoken bcryptjs --save
+
+# Gerenciamento de status http
+    
+    # npm install http-status-codes --save
+    
+    
+    # express-validator
+
+
+# Funções do Sistema
+# 1. Registrar compras(Users: todos)
+# 2. Registrar pagamentos(Users: todos, porém os usuários MASTER deverão confirmar posteriormente)
+# 3. Listar débitos atuais do cliente
+# 4. Buscar compras realizadas pelo cliente
+# 5. Analisar potencial de vendas
+# 6. Dados de compras total e extratificada por dia, e usuário

@@ -1,10 +1,12 @@
+//importa os middlewares
+const { verify, isMaster } = require('../middlewares/auth')
+
+//importa os controladores
+const indicadores = require('../controllers/indicadores')
+
 /** @param { import('express').Express} app */
 
+//Definição das rotas
 module.exports = app => {
-    app.get('/indicadores', (_, res) => {
-        res.status(200).json({
-            estabelecimento: 'Mercado do Produtor',
-            totaldebitos: 278481.24
-        })
-    })
+    app.get('/indicadores', verify, isMaster, indicadores.getData)
 }
