@@ -26,3 +26,7 @@ yarn sequelize init
 
 # Criando a aplicação
     # yarn add express dotenv cors consign compression body-parser
+
+
+# Implementando o middleware e rotas de autenticação
+    # npm install jsonwebtoken bcryptjs --save

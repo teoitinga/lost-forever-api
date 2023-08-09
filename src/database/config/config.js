@@ -16,7 +16,7 @@ module.exports = {
     username: "esloctaru",
     password: "#H0864#@",
     database: "lost",
-    host: "45.174.40.217",
+    host: process.env.PROD_DB_HOST,
     dialect: "mysql",
     define: {
       timestamps: true,
