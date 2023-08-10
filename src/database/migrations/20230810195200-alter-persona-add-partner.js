@@ -4,17 +4,18 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return Promise.all([
-      queryInterface.changeColumn('persona', 'id', {
+      queryInterface.addColumn('persona', 'partner', {
         type: Sequelize.STRING,
-        defaultValue: Sequelize.UUIDV4,
+        allowNull: false,
+        unique: false,
+        defaultValue: undefined,
       }),
     ]);
   },
 
   down: (queryInterface) => {
     return Promise.all([
-      queryInterface.changeColumn('persona', 'id', {
-        type: Sequelize.INTEGER
+      queryInterface.removeColumn('persona', 'partner', {
       }),
     ]);
   },

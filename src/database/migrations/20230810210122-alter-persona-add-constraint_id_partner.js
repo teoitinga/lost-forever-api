@@ -4,18 +4,18 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return Promise.all([
-      queryInterface.changeColumn('persona', 'id', {
-        type: Sequelize.STRING,
-        defaultValue: Sequelize.UUIDV4,
+      queryInterface.addConstraint('persona', {
+        fields: ['id', 'partner'],
+        type: 'UNIQUE',
+        name: 'unique_id_partner',
+
       }),
     ]);
   },
 
   down: (queryInterface) => {
     return Promise.all([
-      queryInterface.changeColumn('persona', 'id', {
-        type: Sequelize.INTEGER
-      }),
+      
     ]);
   },
 };
