@@ -10,7 +10,7 @@ module.exports = {
         CONTATODESV: "(33) 9 9906-5029",
         VERSAO: "V 2.2017 A",
         EMAIL: "teo.itinga@gmail.com",
-        CODINSTALL: "IURYWSHAJF",
+        CODINSTALL: "ASDJHSDASDKJL-ASDADADHKJHAS", 
         UPDATEKEY: "EPRIUYHKSF",
         ESTABELECIMENTO: "Casa do Agricultor",
         ENDERECOEST: "Rua Rui Barbosa",

@@ -49,6 +49,10 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: true,
             },
+            fkpartner: {
+                type: Sequelize.STRING,
+                allowNull: true,
+            },
             state: {
                 type: Sequelize.INTEGER,
                 allowNull: true,

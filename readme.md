@@ -1,6 +1,8 @@
 # Lost - Sistema de Gerenciamento de débitos
 ##### _Sistema de Gerenciamento de débitos_
 
+#### Node Version: v12.22.12
+#### Npm version: 6.14.16
 
 ##### Funções do Sistema
 
@@ -28,7 +30,9 @@ yarn sequelize db:create
 yarn sequelize db:migrate
 ```
 
-4. Defina os dados do novo campo "partner" em todas as tabelas para o "CODINSTALL" na tabela perfil. Este código é único para cada estabelecimento.
+4. Roda o script sql na pasta script;
+
+5. Defina os dados do novo campo "partner" em todas as tabelas para o "CODINSTALL" na tabela perfil. Este código é único para cada estabelecimento.
 _Não esquece deste detalhe antes de inserir os dados de backup do novo estabelecimento, pois pode causar sérios danos ao banco de dados(é recomendável fazer uma cópia antes desta operação)_
 
 ##### Criando a estrutura padrão de projeto node

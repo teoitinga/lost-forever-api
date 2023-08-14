@@ -36,6 +36,10 @@ module.exports = {
             entregue_por: {
                 type: Sequelize.INTEGER,
                 allowNull: true,
+            },
+            fkpartner: {
+                type: Sequelize.STRING,
+                allowNull: true,
             }
         });
     },

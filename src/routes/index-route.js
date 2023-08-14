@@ -2,6 +2,6 @@
 
 module.exports = app => {
     app.get('/', (_, res) => {
-        res.send('Você chamou a rota raiz!')
+        res.send('Welcome, this is a root route!')
     })
 }
