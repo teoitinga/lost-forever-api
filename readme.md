@@ -14,7 +14,7 @@
 - 6. Dados de compras total e extratificada por dia, e usuário
 
 
-##### Pasos para recuperar os dados
+##### Passos para recuperar os dados
 
 1. Criar banco de dados
 ```sh
@@ -32,8 +32,18 @@ yarn sequelize db:migrate
 
 4. Roda o script sql na pasta script;
 
-5. Defina os dados do novo campo "partner" em todas as tabelas para o "CODINSTALL" na tabela perfil. Este código é único para cada estabelecimento.
-_Não esquece deste detalhe antes de inserir os dados de backup do novo estabelecimento, pois pode causar sérios danos ao banco de dados(é recomendável fazer uma cópia antes desta operação)_
+
+##### Passos para adicionar novos dados de um outro banco de dados
+
+##### é importante observar que já não se deve fazer mudanças no banco dde dados, somente importar os dados
+1. Obtenha os dados no formato insert into...values...
+- após into table insira na mesma ordem as colunas desejadas.(adjustdb.sql - recovery p01).
+- Substitua o trecho da coluna "INSERT INTO..." até a keyword "VALUES"
+- Esecute o script;
+- Repita esta operação para as tabelas: persona, compra e detalhecompra.
+- o Banco de dados está pronto para uso.
+
+2. 
 
 ##### Criando a estrutura padrão de projeto node
 ```sh

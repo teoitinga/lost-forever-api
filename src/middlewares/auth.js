@@ -10,10 +10,7 @@ const bcrypt = require('bcryptjs');
 
 require('dotenv').config();
 
-const perfil = {
-    MASTER: 'm',
-    USER: 'u'
-}
+const perfil = require('../../perfil');
 
 function authenticate(req, res, next) {
 
