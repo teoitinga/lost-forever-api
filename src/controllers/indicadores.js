@@ -5,13 +5,20 @@ const {
     getStatusCode,
 } = require('http-status-codes');
 
-function getData(_, res) {
+async function getData(req, res) {
 
-    const response = {
-        estabelecimento: 'Mercado do Produtor',
-        totaldebitos: 278481.24
+    try{
+        const response = {
+            estabelecimento: 'Mercado do Produtor',
+            totaldebitos: 278481.24
+        }
+        console.log('response ', response)
+        res.status(StatusCodes.OK).json(response)
+
+    }catch(e){
+        console.log(e)
+        res.status(e.status).json(e)
     }
 
-    res.status(StatusCodes.OK).json(response)
 }
 module.exports = {getData} 

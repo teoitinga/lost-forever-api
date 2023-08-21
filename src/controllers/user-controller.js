@@ -21,7 +21,7 @@ class userController{
             res.status(StatusCodes.OK).json(response)
 
         }catch(e){
-            res.status(StatusCodes.NOT_FOUND).json(ReasonPhrases.NO_CONTENT)
+            res.status(e.status).json(e)
         }
     }
 

@@ -31,7 +31,7 @@ yarn sequelize db:migrate
 ```
 
 4. Roda o script sql na pasta script;
-
+ 
 
 ##### Passos para adicionar novos dados de um outro banco de dados
 

@@ -4,5 +4,5 @@ const { authenticate } = require('../middlewares/auth')
 
 
 module.exports = app => {
-    app.post('/login', authenticate, (req, res) => {})
+    app.post('/login', authenticate)
 }
