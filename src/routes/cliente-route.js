@@ -1,5 +1,6 @@
 
-const { verify, isMaster } = require('../middlewares/auth')
+const Auth = require('../middlewares/auth');
+const auth = new Auth();
 
 const User = require('../controllers/cliente-controller');
 const user = new User();
@@ -10,5 +11,5 @@ const user = new User();
 
 module.exports = app => {
     app.get('/cliente/:id', user.getClienteById),
-    app.get('/clientebyname/:name', verify, user.findByNameContain)
+    app.get('/clientebyname/:name', user.findByNameContain)
 }

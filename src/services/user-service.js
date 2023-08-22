@@ -8,7 +8,7 @@ const connection = require('../database/models');
 const { response } = require('express');
 require('dotenv')
 class UserService {
-//$2a$10$Z6GtNQhML9g08gR.evUVe.6RFY/UB.HLyqWbQKgwERJemUhZiaNxq
+
     async getUserById(id) {
 
         const query = `

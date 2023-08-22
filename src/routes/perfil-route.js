@@ -1,5 +1,6 @@
 //importa os middlewares
-const { verify, isMaster } = require('../middlewares/auth')
+const Auth = require('../middlewares/auth');
+const auth = new Auth();
 
 //importa os controladores
 const indicadores = require('../controllers/indicadores')
@@ -8,5 +9,5 @@ const indicadores = require('../controllers/indicadores')
 
 //Definição das rotas
 module.exports = app => {
-    app.get('/indicadores', verify, isMaster, indicadores.getData)
+    app.get('/indicadores', auth.verify, auth.isMaster, indicadores.getData)
 }

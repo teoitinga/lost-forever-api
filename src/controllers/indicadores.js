@@ -12,11 +12,11 @@ async function getData(req, res) {
             estabelecimento: 'Mercado do Produtor',
             totaldebitos: 278481.24
         }
-        console.log('response ', response)
+
         res.status(StatusCodes.OK).json(response)
 
     }catch(e){
-        console.log(e)
+
         res.status(e.status).json(e)
     }
 

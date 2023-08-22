@@ -1,13 +1,13 @@
 
 const {
-    ReasonPhrases,
-    StatusCodes,
-    getReasonPhrase,
-    getStatusCode,
-} = require('http-status-codes');
 
+    StatusCodes,
+
+} = require('http-status-codes');
+const jwt = require('jsonwebtoken');
 const ClienteService = require('../services/cliente-service');
-const { authenticate } = require('../middlewares/auth');
+const Auth = require('../middlewares/auth');
+const auth = new Auth();
 const clienteService = new ClienteService()
 
 class userController {
@@ -27,19 +27,22 @@ class userController {
         }
 
     }
+
     async findByNameContain(req, res) {
 
         try {
 
             const name = req.params.name;
-            const token = authenticate.getToken(req);
-            const response = await clienteService.findByNameContain(name, token);
+            const token = await auth.getToken(req, res);
+            const decoded = jwt.decode(token);
+            const response = await clienteService.findByNameContain(name, decoded['partner']);
 
             res.status(StatusCodes.OK).json(response)
 
         } catch (e) {
 
             res.status(e.status).json(e)
+
         }
 
     }

@@ -1,7 +1,11 @@
 const Model = require('../database/models/persona-model');
 const Dto = require('../dtos/cliente-dto');
+const Exception = require('../exceptions/lost-exception');
+const {
 
+    StatusCodes,
 
+} = require('http-status-codes');
 class ClienteService {
 
     async getClienteById(id, parnterid) {
@@ -14,24 +18,54 @@ class ClienteService {
             and persona.partner = ${parnterid}
                 ;
             `;
+        try {
 
-        const response = await Model.sequelize.query(query, { type: Model.sequelize.QueryTypes.SELECT });
+            const response = await Model.sequelize.query(query, { type: Model.sequelize.QueryTypes.SELECT });
+            return new Dto(response[0]);
 
-        return new Dto(response[0]);
+        } catch (e) {
+
+            const exception = await new Exception({
+                name: 'Cliente não localizado',
+                message: 'Não foi localizado nenhum registro para este cliente!',
+                status: await StatusCodes.NOT_FOUND,
+            });
+
+            throw exception;
+        }
+
     }
-    async findByNameContain(text, parnterid){
+    async findByNameContain(text, parnterid) {
+
         const query = `
         select * from lost.persona
         where
-        persona.name like('%${text}%')
+        (
+            persona.nome like('%${text}%')
+            or persona.nome like('%${text}%')
+            or persona.fone like('%${text}%')
+        )
         and persona.categoria = 'c'
-        and persona.partner = ${parnterid}
+        and persona.partner = '${parnterid}'
             ;
         `;
+        try {
+            const response = await Model.sequelize.query(query, { type: Model.sequelize.QueryTypes.SELECT });
+            if(response.length == 0){
+                throw new Error();
+            }
+            return response.map(r=> new Dto(r));
 
-    const response = await Model.sequelize.query(query, { type: Model.sequelize.QueryTypes.SELECT });
+        } catch (e) {
+            const exception = await new Exception({
+                name: 'Cliente não localizado',
+                message: `Não foi localizado nenhum registro para o cliente ${text}`,
+                status: await StatusCodes.NOT_FOUND,
+            });
 
-    return new Dto(response[0]);       
+            throw exception;
+        }
+
     }
 }
 
