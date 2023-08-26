@@ -14,20 +14,32 @@ class userController {
 
     async getClienteById(req, res) {
 
-        const id = req.params.id;
-        
         try {
 
-            const response = await clienteService.getClienteById(id)
+            const response = await clienteService.getClienteById(req, res)
             res.status(StatusCodes.OK).json(response)
 
         } catch (e) {
-
             res.status(e.status).json(e)
         }
 
     }
 
+    async findAll(req, res) {
+
+        try {
+
+            const response = await clienteService.findAll(req, res);
+
+            res.status(StatusCodes.OK).json(response)
+
+        } catch (e) {
+
+            res.status(e.status).json(e)
+
+        }
+
+    }
     async findByNameContain(req, res) {
 
         try {

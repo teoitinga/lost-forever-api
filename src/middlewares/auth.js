@@ -38,39 +38,20 @@ class Authenticate {
         bcrypt.compare(_password, user.password, (err, isMatch) => {
             if (err || (isMatch == false)) {
 
-                return invalidPassword(res)
+                return service.invalidPassword(res)
             }
 
-            return validPassword(res, user)
+            return service.validPassword(res, user)
 
         });
 
     }
 
-    async validPassword(response, user) {
-        let dataatual = await moment()
-
-        user.logged = dataatual.format();
-        user.expires = dataatual.add(process.env.TIME_EXPIRES_HOUR, 'hours').format();
-
-        const token = await jwt.sign(JSON.stringify(user), process.env.SECRET_KEY)
-
-        return response.status(StatusCodes.ACCEPTED).send({ token: token });
-        //return exception;
+    async decodetoken(token){
+        const decoded = jwt.decode(token);
+        return decoded;
     }
 
-    async invalidPassword(response) {
-
-        const r = await new Exception({
-            name: 'Error',
-            message: ReasonPhrases.NON_AUTHORITATIVE_INFORMATION,
-            status: StatusCodes.UNAUTHORIZED
-        });
-
-        //return response.status(StatusCodes.UNAUTHORIZED).json(r);
-        return exception;
-
-    }
     async getToken(req, res) {
 
         let exception = await new Exception({
@@ -107,14 +88,12 @@ class Authenticate {
             exception.message = 'Não existe uma credencial válida para permitir o acesso';
             exception.status = await StatusCodes.FORBIDDEN;
 
-            //return res.status(StatusCodes.FORBIDDEN).json(exception);
             throw exception;
         }
 
         //Se o token é válido, segue com o acesso
         //se não está expirado
         if (moment().isAfter(moment(decoded['expires']))) {
-            //return res.status(StatusCodes.FORBIDDEN).json(exception);
 
             const exception = await new Exception({
                 name: 'Token expired',
@@ -130,10 +109,12 @@ class Authenticate {
         let partner = undefined;
 
         try{
+
             partnerid = await decoded['partner'];
-            partner = await service.getParnerById(partnerid);
+            partner = await service.getPartnerById(partnerid);
             
         }catch(e){
+
             const exception = await new Exception({
                 name: `Informações da empresa não podem ser obtidas.`,
                 message: 'O token não fornece informações sobre a empresa que está na operação',
