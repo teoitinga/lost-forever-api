@@ -10,6 +10,8 @@ const Auth = require('../middlewares/auth');
 const auth = new Auth();
 const clienteService = new ClienteService()
 
+const Exception = require('../exceptions/lost-exception');
+
 class userController {
 
     async getClienteById(req, res) {
@@ -20,7 +22,13 @@ class userController {
             res.status(StatusCodes.OK).json(response)
 
         } catch (e) {
-            res.status(e.status).json(e)
+            const exception = await new Exception({
+                name: e.name? e.name : 'Não há clientes registrados',
+                message: e.message? e.message : `Não foi localizado nenhum registro`,
+                status: e.status? e.status : await StatusCodes.NOT_FOUND,
+            });
+
+            res.status(exception.status).json(exception)
         }
 
     }
@@ -35,7 +43,13 @@ class userController {
 
         } catch (e) {
 
-            res.status(e.status).json(e)
+            const exception = await new Exception({
+                name: e.name? e.name : 'Não há clientes registrados',
+                message: e.message? e.message : `Não foi localizado nenhum registro`,
+                status: e.status? e.status : await StatusCodes.NOT_FOUND,
+            });
+
+            res.status(exception.status).json(exception)
 
         }
 
@@ -44,16 +58,19 @@ class userController {
 
         try {
 
-            const name = req.params.name;
-            const token = await auth.getToken(req, res);
-            const decoded = jwt.decode(token);
-            const response = await clienteService.findByNameContain(name, decoded['partner']);
+
+            const response = await clienteService.findByNameContain(req, res);
 
             res.status(StatusCodes.OK).json(response)
 
         } catch (e) {
+            const exception = await new Exception({
+                name: e.name? e.name : 'Não há clientes registrados',
+                message: e.message? e.message : `Não foi localizado nenhum registro`,
+                status: e.status? e.status : await StatusCodes.NOT_FOUND,
+            });
 
-            res.status(e.status).json(e)
+            res.status(exception.status).json(exception)
 
         }
 

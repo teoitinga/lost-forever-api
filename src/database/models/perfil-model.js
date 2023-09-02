@@ -4,7 +4,7 @@ class Perfil extends Model {
 
     static init(connection) {
         super.init({
-             DSC: DataTypes.STRING,
+            DSC: DataTypes.STRING,
             DESENV: DataTypes.STRING,
             CONTATODESV: DataTypes.STRING,
             VERSAO: DataTypes.STRING,

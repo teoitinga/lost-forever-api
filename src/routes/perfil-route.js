@@ -9,5 +9,6 @@ const indicadores = require('../controllers/indicadores')
 
 //Definição das rotas
 module.exports = app => {
-    app.get('/indicadores', auth.verify, auth.isMaster, indicadores.getData)
+    //app.get('/indicadores', auth.verify, auth.isMaster, indicadores.getData)
+    app.get('/indicadores', auth.verify, indicadores.getData)
 }

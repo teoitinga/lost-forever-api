@@ -6,11 +6,11 @@ const Service = require('../middlewares/auth');
 const service = new Service();
 
 const {
-
     StatusCodes,
-
 } = require('http-status-codes');
-class ClienteService {
+
+
+module.exports = class ClienteService {
 
     async getPartner(req, res) {
 
@@ -21,10 +21,12 @@ class ClienteService {
     }
 
     async getClienteById(req, res) {
+
         const partnerid = await this.getPartner(req, res);
         const id = req.params.id;
+
         const query = `
-        select * from lost.persona
+        select * from ${process.env.PROD_DB_NAME}.persona
         where
         persona.id=${id}
         and persona.categoria = 'c'
@@ -48,12 +50,13 @@ class ClienteService {
         }
 
     }
+
     async findAll(req, res) {
         
         const partnerid = await this.getPartner(req, res);
 
         const query = `
-        select * from lost.persona
+        select * from ${process.env.PROD_DB_NAME}.persona
         where
         persona.categoria = 'c'
         and persona.partner = '${partnerid}'
@@ -77,13 +80,14 @@ class ClienteService {
         }
 
     }
+    
     async findByNameContain(req, res) {
 
         const text = req.params.name;
         const partnerid = await this.getPartner(req, res);
 
         const query = `
-        select * from lost.persona
+        select * from ${process.env.PROD_DB_NAME}.persona
         where
         (
             persona.nome like('%${text}%')
@@ -113,5 +117,3 @@ class ClienteService {
 
     }
 }
-
-module.exports = ClienteService
