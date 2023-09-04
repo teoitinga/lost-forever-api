@@ -39,7 +39,7 @@ yarn sequelize db:migrate
 1. Obtenha os dados no formato insert into...values...
 - após into table insira na mesma ordem as colunas desejadas.(adjustdb.sql - recovery p01).
 - Substitua o trecho da coluna "INSERT INTO..." até a keyword "VALUES"
-- Esecute o script;
+- Execute o script;
 - Repita esta operação para as tabelas: persona, compra e detalhecompra.
 - o Banco de dados está pronto para uso.
 

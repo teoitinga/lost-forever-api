@@ -1,0 +1,14 @@
+version: '3.0'
+services:
+  mysqldb:
+    image: mysql:8.0.34
+    container_name: mysqldb
+    env_file:
+      - ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$PROD_DB_USER_PASS
+      - MYSQL_DATABASE=$PROD_DB_NAME
+      - MYSQL_USER=$PROD_DB_USER_NAME
+      - MYSQL_PASSWORD=$PROD_DB_USER_PASS
+    ports:
+      - 3310:3306

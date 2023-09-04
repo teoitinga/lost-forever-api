@@ -1,14 +1,6 @@
-FROM node
-
-WORKDIR /usr/app
-
-COPY package.json /usr/app/
-
-RUN yarn install
-
-COPY . . 
-
-EXPOSE 5500
-
-
-CMD ["yarn", "start"]
+FROM node:12.22.12
+WORKDIR /api
+COPY package.json .
+RUN npm install
+COPY . .
+CMD [ "npm start" ]

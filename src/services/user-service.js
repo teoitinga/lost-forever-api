@@ -10,37 +10,51 @@ const {
 } = require('http-status-codes');
 const connection = require('../database/models');
 const { response } = require('express');
+const Exception = require('../exceptions/lost-exception');
+
 require('dotenv')
-class UserService {
+
+module.exports = class UserService {
 
     async getUserById(id, parnterid) {
 
         const query = `
-        select * from ${process.env.PROD_DB_NAME}.persona
-        where
-        persona.id='${id}'
-        and persona.categoria <> 'u'
-            ;
-        `;
-
+            select * from ${process.env.PROD_DB_NAME}.persona
+            where
+            persona.id='${id}'
+            and persona.categoria <> 'u'
+                ;
+            `;
+ 
         const response = await Model.sequelize.query(query, { type: Model.sequelize.QueryTypes.SELECT });
 
         return new Dto(response[0]);
 
     }
-    
+
     async getPartnerById(id) {
 
-        const query = `
-        select * from ${process.env.PROD_DB_NAME}.perfil
-        where
-        perfil.id='${id}'
-            ;
-        `;
+        try{
+            const query = `
+            select * from ${process.env.PROD_DB_NAME}.perfil
+            where
+            perfil.id='${id}'
+                ;
+            `;
+    
+            const response = await Model.sequelize.query(query, { type: Model.sequelize.QueryTypes.SELECT });
+    
+            return new partnerDto(response[0]);
 
-        const response = await Model.sequelize.query(query, { type: Model.sequelize.QueryTypes.SELECT });
+        }catch(e){
+            const exception = await new Exception({
+                name: 'Error',
+                message: e.message,
+                status: StatusCodes.INTERNAL_SERVER_ERROR
+            });
 
-        return new partnerDto(response[0]);
+            return exception;
+        }
 
     }
 
@@ -58,16 +72,14 @@ class UserService {
 
     async invalidPassword(response) {
 
-        const r = await new Exception({
+        const exception = await new Exception({
             name: 'Error',
             message: ReasonPhrases.NON_AUTHORITATIVE_INFORMATION,
             status: StatusCodes.UNAUTHORIZED
         });
 
-        //return response.status(StatusCodes.UNAUTHORIZED).json(r);
         return exception;
 
     }
 }
 
-module.exports = UserService

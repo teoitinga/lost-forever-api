@@ -29,21 +29,24 @@ module.exports = class Authenticate {
 
     }
 
-    async authenticate(req, res, next) {
+    async authenticate(req, res, next){
+        
+        const _login = req.params.login;
+        const _password = req.params.password;
 
-        const { _login, _password } = {
-            _login: req.body['login'],
-            _password: req.body['password']
+        const user = await service.getPartnerById(_login);
+
+        if(!user.password){
+            const e = user;
+            const exception = await new Exception({
+                name: 'Error',
+                message: e.message,
+                status: StatusCodes.INTERNAL_SERVER_ERROR
+            });
+
+            return exception;
+
         }
-
-        //Localiza os dados do usuario
-        const user = await service.getUserById(_login)
-
-        //Codifica uma senha
-        //const hash = bcrypt.hashSync('jacare', process.env.SECRET_KEY);
-
-
-        //Verifica se a senha é compatível
 
         bcrypt.compare(_password, user.password, (err, isMatch) => {
             if (err || (isMatch == false)) {
@@ -54,6 +57,48 @@ module.exports = class Authenticate {
             return service.validPassword(res, user)
 
         });
+
+  
+    }
+    async authenticate_(req, res, next) {
+
+        const { _login, _password } = {
+            _login: req.body['login'],
+            _password: req.body['password']
+        }
+
+        //Localiza os dados do usuario
+        try{
+            const user = await service.getUserById(_login)
+            //Codifica uma senha
+            //const hash = bcrypt.hashSync('jacare', process.env.SECRET_KEY);
+    
+    
+            //Verifica se a senha é compatível
+    
+    
+            if (!user) {
+                return service.invalidPassword(res)
+            }
+            bcrypt.compare(_password, user.password, (err, isMatch) => {
+                if (err || (isMatch == false)) {
+    
+                    return service.invalidPassword(res)
+                }
+    
+                return service.validPassword(res, user)
+    
+            });
+        }catch(e){
+            const exception = new Exception({
+                name: 'Error',
+                message: e.message,
+                status: StatusCodes.INTERNAL_SERVER_ERROR
+            });
+            //throw exception;
+            //next(exception);
+            return service.invalidPassword(res)
+        }
 
     }
 

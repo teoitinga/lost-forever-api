@@ -5,6 +5,10 @@ const Exception = require('../exceptions/lost-exception');
 const Service = require('../middlewares/auth');
 const service = new Service();
 
+const Serviceitens = require('../services/detalhe-compra-service');
+const serviceitens = new Serviceitens();
+
+
 const {
     StatusCodes,
 } = require('http-status-codes');
@@ -26,6 +30,7 @@ module.exports = class CompraService {
 
         const query = `
         select * from ${process.env.PROD_DB_NAME}.compra
+        where id = '${req.params.id}'
         ;
         `;
         //where
@@ -35,7 +40,14 @@ module.exports = class CompraService {
             if (response.length == 0) {
                 throw new Error();
             }
-            return response.map(r => new Dto(r));
+
+            response = response.map(r => new Dto(r));
+
+            let itens = this.serviceitens.findByIdCompra();
+
+            response.itens = itens;
+
+            return response
 
         } catch (e) {
             const exception = await new Exception({

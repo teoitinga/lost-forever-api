@@ -11,7 +11,6 @@ class DetalheCompraModel extends Model {
             desconto: DataTypes.DECIMAL(6, 2),
             fKcompra: DataTypes.STRING,
             fkpartner: DataTypes.STRING,
-            fkpartner: DataTypes.STRING,
         }, {
             createdAt: 'created',
             updatedAt: 'updated',
