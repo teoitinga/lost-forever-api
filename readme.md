@@ -30,7 +30,7 @@ yarn sequelize db:create
 yarn sequelize db:migrate
 ```
 
-4. Roda o script sql na pasta script;
+4. Roda o script sql na pasta "./src/database/script/adjustdb.sql";
  
 
 ##### Passos para adicionar novos dados de um outro banco de dados

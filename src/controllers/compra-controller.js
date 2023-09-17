@@ -9,8 +9,6 @@ const Service = require('../services/compra-service');
 const service = new Service()
 
 const jwt = require('jsonwebtoken');
-const Auth = require('../middlewares/auth');
-const auth = new Auth();
 
 const Exception = require('../exceptions/lost-exception');
 

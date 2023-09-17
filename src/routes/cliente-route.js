@@ -1,7 +1,4 @@
 
-const Auth = require('../middlewares/auth');
-const auth = new Auth();
-
 const Cliente = require('../controllers/cliente-controller');
 const cliente = new Cliente();
 

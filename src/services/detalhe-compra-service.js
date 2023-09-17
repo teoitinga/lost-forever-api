@@ -3,7 +3,7 @@ const Dto = require('../dtos/detalhe-compra-dto');
 const Exception = require('../exceptions/lost-exception');
 
 const Service = require('../middlewares/auth');
-const service = new Service();
+
 
 const {
     StatusCodes,
@@ -31,22 +31,14 @@ module.exports = class CompraService {
         `;
         //where
         //and compra.partner = '${partnerid}'
-        try {
+
             const response = await Model.sequelize.query(query, { type: Model.sequelize.QueryTypes.SELECT });
             if (response.length == 0) {
                 throw new Error();
             }
             return response.map(r => new Dto(r));
 
-        } catch (e) {
-            const exception = await new Exception({
-                name: 'Não há itens registradas',
-                message: `Não foi localizado nenhum registro`,
-                status: await StatusCodes.NOT_FOUND,
-            });
 
-            throw exception;
-        }
 
     }
     async findByCompra(req, res) {
@@ -60,22 +52,12 @@ module.exports = class CompraService {
         `;
         //where
         //and compra.partner = '${partnerid}'
-        try {
             const response = await Model.sequelize.query(query, { type: Model.sequelize.QueryTypes.SELECT });
             if (response.length == 0) {
                 throw new Error();
             }
             return response.map(r => new Dto(r));
 
-        } catch (e) {
-            const exception = await new Exception({
-                name: 'Não há itens registradas',
-                message: `Não foi localizado nenhum registro`,
-                status: await StatusCodes.NOT_FOUND,
-            });
-
-            throw exception;
-        }
 
     }
     async findById(req, res) {
@@ -89,22 +71,13 @@ module.exports = class CompraService {
         `;
         //where
         //and compra.partner = '${partnerid}'
-        try {
+
             const response = await Model.sequelize.query(query, { type: Model.sequelize.QueryTypes.SELECT });
             if (response.length == 0) {
                 throw new Error();
             }
             return response.map(r => new Dto(r));
 
-        } catch (e) {
-            const exception = await new Exception({
-                name: 'Não há itens registradas',
-                message: `Não foi localizado nenhum registro`,
-                status: await StatusCodes.NOT_FOUND,
-            });
-
-            throw exception;
-        }
 
     }
     async findAll(req, res) {
@@ -118,22 +91,13 @@ module.exports = class CompraService {
         `;
 //        where
 //        compra.partner = '${partnerid}'
-        try {
+
             const response = await Model.sequelize.query(query, { type: Model.sequelize.QueryTypes.SELECT });
             if (response.length == 0) {
                 throw new Error();
             }
             return response.map(r => new Dto(r));
 
-        } catch (e) {
-            const exception = await new Exception({
-                name: 'Não há itens registradas registrados',
-                message: `Não foi localizado nenhum registro`,
-                status: await StatusCodes.NOT_FOUND,
-            });
-
-            throw exception;
-        }
 
     }
 

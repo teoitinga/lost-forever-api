@@ -1,6 +1,3 @@
-//importa os middlewares
-const Auth = require('../middlewares/auth');
-const auth = new Auth();
 
 //importa os controladores
 const indicadores = require('../controllers/indicadores')

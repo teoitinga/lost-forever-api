@@ -1,8 +1,7 @@
-const Auth = require('../middlewares/auth');
-const auth = new Auth();
+const user = require('../controllers/user-controller')
 /** @param { import('express').Express} app */
 
 
 module.exports = app => {
-    app.post('/login', auth.authenticate)
+    app.post('/login', user.login)
 }

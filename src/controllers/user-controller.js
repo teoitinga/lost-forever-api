@@ -1,29 +1,33 @@
 
 const {
-    ReasonPhrases,
     StatusCodes,
-    getReasonPhrase,
-    getStatusCode,
 } = require('http-status-codes');
 
-const UserService = require('../services/user-service')
-const userService = new UserService()
+const userService = require('../services/user-service')
 
-class userController{
+
+class userController {
+
+    async login(req, res) {
+        console.log(res)
+        const _login = req.body.login;
+        const _password = req.body.password;
+
+        const token = await userService.login(_login, _password);
+
+        res.status(StatusCodes.OK).json(token);
+
+    }
 
     async getUserById(req, res) {
-    
+
         const id = req.params.id
 
-        try{
-            const response = await userService.getUserById(id)
-    
-            res.status(StatusCodes.OK).json(response)
+        const response = await userService.getUserById(id)
 
-        }catch(e){
-            res.status(e.status).json(e)
-        }
+        res.status(StatusCodes.OK).json(response)
+
     }
 
 }
-module.exports = userController
+module.exports = new userController()

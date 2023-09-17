@@ -16,4 +16,9 @@ module.exports = app => {
   app.use(compression())
   app.use(express.json())
   app.use(express.urlencoded({ extended: false }))
+  app.use((error, req, res, next)=>{
+
+    console.log(error);
+    return res.json('middleware de erro')
+})
 }

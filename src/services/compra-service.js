@@ -3,7 +3,7 @@ const Dto = require('../dtos/compra-dto');
 const Exception = require('../exceptions/lost-exception');
 
 const Service = require('../middlewares/auth');
-const service = new Service();
+
 
 const Serviceitens = require('../services/detalhe-compra-service');
 const serviceitens = new Serviceitens();
@@ -25,7 +25,7 @@ module.exports = class CompraService {
     }
 
     async findById(req, res) {
-        
+
         const partnerid = await this.getPartner(req, res);
 
         const query = `
@@ -35,57 +35,39 @@ module.exports = class CompraService {
         `;
         //where
         //and compra.partner = '${partnerid}'
-        try {
-            const response = await Model.sequelize.query(query, { type: Model.sequelize.QueryTypes.SELECT });
-            if (response.length == 0) {
-                throw new Error();
-            }
 
-            response = response.map(r => new Dto(r));
-
-            let itens = this.serviceitens.findByIdCompra();
-
-            response.itens = itens;
-
-            return response
-
-        } catch (e) {
-            const exception = await new Exception({
-                name: 'Não há compras registradas',
-                message: `Não foi localizado nenhum registro`,
-                status: await StatusCodes.NOT_FOUND,
-            });
-
-            throw exception;
+        const response = await Model.sequelize.query(query, { type: Model.sequelize.QueryTypes.SELECT });
+        if (response.length == 0) {
+            throw new Error();
         }
+
+        response = response.map(r => new Dto(r));
+
+        let itens = this.serviceitens.findByIdCompra();
+
+        response.itens = itens;
+
+        return response
+
 
     }
     async findAll(req, res) {
-        
+
         const partnerid = await this.getPartner(req, res);
 
         const query = `
         select * from ${process.env.PROD_DB_NAME}.compra
         ;
         `;
-//        where
-//        compra.partner = '${partnerid}'
-        try {
-            const response = await Model.sequelize.query(query, { type: Model.sequelize.QueryTypes.SELECT });
-            if (response.length == 0) {
-                throw new Error();
-            }
-            return response.map(r => new Dto(r));
+        //        where
+        //        compra.partner = '${partnerid}'
 
-        } catch (e) {
-            const exception = await new Exception({
-                name: 'Não há compras registradas registrados',
-                message: `Não foi localizado nenhum registro`,
-                status: await StatusCodes.NOT_FOUND,
-            });
-
-            throw exception;
+        const response = await Model.sequelize.query(query, { type: Model.sequelize.QueryTypes.SELECT });
+        if (response.length == 0) {
+            throw new Error();
         }
+        return response.map(r => new Dto(r));
+
 
     }
 

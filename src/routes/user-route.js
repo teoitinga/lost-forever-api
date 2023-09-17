@@ -1,5 +1,5 @@
-const User = require('../controllers/user-controller');
-const user = new User();
+const user = require('../controllers/user-controller');
+
 
 /** @param { import('express').Express} app */
 
